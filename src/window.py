@@ -29,4 +29,4 @@ class Window:
             canvas=self.canvas,
             fill_color=fill_color
         )
-    
+ 
