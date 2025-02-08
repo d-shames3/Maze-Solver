@@ -16,6 +16,10 @@ def main():
     cell_3.draw("white")
     cell_4.draw("white")
 
+    cell_1.draw_move(cell_2)
+    cell_2.draw_move(cell_3)
+    cell_3.draw_move(cell_4)
+
     win.wait_for_close()
 
 if __name__ == "__main__":

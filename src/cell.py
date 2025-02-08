@@ -50,3 +50,20 @@ class Cell:
             point_8 = Point(self._x2, self._y2)
             bottom_wall = Line(point_7, point_8)
             self._win.draw_line(bottom_wall, fill_color)
+
+    def draw_move(self, to_cell, undo=False):
+        if undo:
+            fill_color = "gray"
+        else:
+            fill_color = "red"
+        
+        y_1 = (self._y1 + self._y2) // 2
+        x_1 = (self._x1 + self._x2) // 2
+        start = Point(x_1, y_1)
+
+        y_2 = (to_cell._y1 + to_cell._y2) // 2
+        x_2 = (to_cell._x1 + to_cell._x2) // 2
+        end = Point(x_2, y_2)
+
+        move = Line(start, end)
+        self._win.draw_line(move, fill_color)
