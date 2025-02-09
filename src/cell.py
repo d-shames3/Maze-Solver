@@ -26,30 +26,38 @@ class Cell:
         self._y2 = y2
         self._win = win
 
-    def draw(self, fill_color):
+    def draw(self):
+        point_1 = Point(self._x1, self._y1)
+        point_2 = Point(self._x1, self._y2)
+        left_wall = Line(point_1, point_2)
         if self.has_left_wall:
-            point_1 = Point(self._x1, self._y1)
-            point_2 = Point(self._x1, self._y2)
-            left_wall = Line(point_1, point_2)
-            self._win.draw_line(left_wall, fill_color)
+            self._win.draw_line(left_wall)
+        else:
+            self._win.draw_line(left_wall, fill_color="white")
         
+        point_3 = Point(self._x2, self._y1)
+        point_4 = Point(self._x2, self._y2)
+        right_wall = Line(point_3, point_4)
         if self.has_right_wall:
-            point_3 = Point(self._x2, self._y1)
-            point_4 = Point(self._x2, self._y2)
-            right_wall = Line(point_3, point_4)
-            self._win.draw_line(right_wall, fill_color)
+            self._win.draw_line(right_wall)
+        else:
+            self._win.draw_line(right_wall, fill_color="white")
 
+        point_5 = Point(self._x1, self._y1)
+        point_6 = Point(self._x2, self._y1)
+        top_wall = Line(point_5, point_6)
         if self.has_top_wall:
-            point_5 = Point(self._x1, self._y1)
-            point_6 = Point(self._x2, self._y1)
-            top_wall = Line(point_5, point_6)
-            self._win.draw_line(top_wall, fill_color)
+            self._win.draw_line(top_wall)
+        else:
+            self._win.draw_line(top_wall, fill_color="white")
 
+        point_7 = Point(self._x1, self._y2)
+        point_8 = Point(self._x2, self._y2)
+        bottom_wall = Line(point_7, point_8)
         if self.has_bottom_wall:
-            point_7 = Point(self._x1, self._y2)
-            point_8 = Point(self._x2, self._y2)
-            bottom_wall = Line(point_7, point_8)
-            self._win.draw_line(bottom_wall, fill_color)
+            self._win.draw_line(bottom_wall)
+        else:
+            self._win.draw_line(bottom_wall, fill_color="white")
 
     def draw_move(self, to_cell, undo=False):
         if undo:

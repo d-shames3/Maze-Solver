@@ -40,13 +40,22 @@ class Maze:
             for j in range(self.num_rows):
                 if self.win is not None:
                     self._draw_cell(i, j)
+        self._break_entrance_and_exit()
 
 
     def _draw_cell(self, i, j):
         cell = self._cells[i][j]
-        cell.draw("white")
+        cell.draw()
         self._animate()
 
     def _animate(self):
         self.win.redraw()
         time.sleep(.05)
+
+    def _break_entrance_and_exit(self):
+        self._cells[0][0].has_top_wall = False
+        if self.win is not None:
+            self._draw_cell(0, 0)
+        self._cells[-1][-1].has_bottom_wall = False
+        if self.win is not None:
+            self._draw_cell(-1, -1)
