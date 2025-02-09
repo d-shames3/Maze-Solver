@@ -79,7 +79,8 @@ class Maze:
                 coordinates.append((i, j + 1))
 
             if len(coordinates) == 0:
-                self._draw_cell(i, j)
+                if self.win is not None:
+                    self._draw_cell(i, j)
                 return
 
             direction_index = random.randrange(len(coordinates))
@@ -99,3 +100,8 @@ class Maze:
                 self._cells[i][j - 1].has_bottom_wall = False
 
             self._break_walls_r(next_index[0], next_index[1])
+
+    def _reset_cells_visited(self):
+        for col in self._cells:
+            for cell in col:
+                cell._visited = False
