@@ -101,6 +101,56 @@ class Maze:
                 self._cells[i][j - 1].has_bottom_wall = False
 
             self._break_walls_r(next_index[0], next_index[1])
+    
+    def solve_maze(self):
+        solved = self._solve_maze_r(i=0, j=0)
+        return solved
+    
+    def _solve_maze_r(self, i, j):
+        self._animate()
+        self._cells[i][j]._visited = True
+
+        if i == self.num_cols - 1 and j == self.num_rows - 1:
+            return True
+        
+        if i > 0 and not self._cells[i - 1][j]._visited and not self._cells[i - 1][j].has_right_wall and not self._cells[i][j].has_left_wall:
+            self._cells[i][j].draw_move(self._cells[i - 1][j])
+            next_cell = self._solve_maze_r(i - 1, j)
+            if next_cell:
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i-1][j], undo=True)
+
+        if i < self.num_cols - 1 and not self._cells[i + 1][j]._visited and not self._cells[i + 1][j].has_left_wall and not self._cells[i][j].has_right_wall:
+            self._cells[i][j].draw_move(self._cells[i + 1][j])
+            next_cell = self._solve_maze_r(i + 1, j)
+            if next_cell:
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i + 1][j], undo=True)
+
+
+        if j > 0 and not self._cells[i][j - 1]._visited and not self._cells[i][j - 1].has_bottom_wall and not self._cells[i][j].has_top_wall:
+            self._cells[i][j].draw_move(self._cells[i][j - 1])
+            next_cell = self._solve_maze_r(i, j - 1)
+            if next_cell:
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i][j - 1], undo=True)
+
+        if j < self.num_rows - 1 and not self._cells[i][j + 1]._visited and not self._cells[i][j + 1].has_top_wall and not self._cells[i][j].has_bottom_wall:
+            self._cells[i][j].draw_move(self._cells[i][j + 1])
+            next_cell = self._solve_maze_r(i, j + 1)
+            if next_cell:
+                return True
+            else:
+                self._cells[i][j].draw_move(self._cells[i][j + 1], undo=True)
+        
+        return False
+        
+
+
+
 
     def _reset_cells_visited(self):
         for col in self._cells:
