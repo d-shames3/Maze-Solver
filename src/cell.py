@@ -5,16 +5,16 @@ from line import Line
 
 class Cell:
     def __init__(
-        self, 
-        x1, 
-        x2, 
-        y1, 
-        y2, 
+        self,
+        x1,
+        x2,
+        y1,
+        y2,
         win: Window,
         has_left_wall=True,
         has_right_wall=True,
         has_top_wall=True,
-        has_bottom_wall=True
+        has_bottom_wall=True,
     ):
         self.has_left_wall = has_left_wall
         self.has_right_wall = has_right_wall
@@ -35,7 +35,7 @@ class Cell:
             self._win.draw_line(left_wall)
         else:
             self._win.draw_line(left_wall, fill_color="white")
-        
+
         point_3 = Point(self._x2, self._y1)
         point_4 = Point(self._x2, self._y2)
         right_wall = Line(point_3, point_4)
@@ -65,7 +65,7 @@ class Cell:
             fill_color = "gray"
         else:
             fill_color = "red"
-        
+
         y_1 = (self._y1 + self._y2) // 2
         x_1 = (self._x1 + self._x2) // 2
         start = Point(x_1, y_1)
